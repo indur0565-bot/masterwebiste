@@ -1,301 +1,546 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Little Website</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Gaming Website</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #e3f2fd;
-            text-align: center;
-            color: #17446b;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        header {
-            background: #1976d2;
-            padding: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eaf5ff;
+    color: #17466e;
+    text-align: center;
+}
 
-        .container {
-            padding: 40px 20px;
-        }
+header {
+    background: #1684d8;
+    color: white;
+    padding: 25px 10px;
+    font-size: 27px;
+    font-weight: bold;
+}
 
-        .card, .game-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 4px 15px #b6d9f5;
-        }
+.container {
+    padding: 30px 15px;
+}
 
-        button {
-            background: #2196f3;
-            color: white;
-            border: none;
-            padding: 13px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 5px;
-        }
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 450px;
+    margin: 15px auto;
+    box-shadow: 0 4px 15px #b8d9f2;
+}
 
-        button:hover {
-            background: #1565c0;
-        }
+button {
+    background: #1684d8;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+}
 
-        #games {
-            padding: 35px 15px;
-            margin-top: 30px;
-            background: #bbdefb;
-        }
+button:hover {
+    background: #075da5;
+}
 
-        #board {
-            display: grid;
-            grid-template-columns: repeat(3, 85px);
-            gap: 8px;
-            justify-content: center;
-            margin: 20px auto;
-        }
+h2 {
+    color: #075da5;
+}
 
-        .cell {
-            width: 85px;
-            height: 85px;
-            padding: 0;
-            border-radius: 12px;
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 2px solid #64b5f6;
-            font-size: 35px;
-            font-weight: bold;
-        }
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    max-width: 850px;
+    margin: 20px auto;
+}
 
-        #gameStatus {
-            font-size: 19px;
-            font-weight: bold;
-            min-height: 25px;
-        }
+.game-card {
+    background: white;
+    padding: 15px 8px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px #b8d9f2;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            background: #1976d2;
-            color: white;
-        }
-    </style>
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-picture {
+    font-size: 55px;
+    padding: 15px;
+    background: #d9efff;
+    border-radius: 12px;
+}
+
+.game-card h3 {
+    margin-bottom: 5px;
+}
+
+.game-area {
+    display: none;
+    max-width: 500px;
+    margin: 25px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px #b8d9f2;
+}
+
+#snakeCanvas {
+    background: #102d45;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 320px;
+    margin: 15px auto;
+}
+
+.memory-card {
+    height: 65px;
+    font-size: 25px;
+    padding: 5px;
+    background: #d9efff;
+    color: #17466e;
+}
+
+.memory-card.open {
+    background: #1684d8;
+    color: white;
+}
+
+#gameMessage {
+    font-weight: bold;
+    min-height: 25px;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: #1684d8;
+    color: white;
+}
+</style>
 </head>
 
 <body>
 
-<header>My Little Website 🌸</header>
+<header>💙 My Gaming Website 🎮</header>
 
 <div class="container">
-    <div class="card">
-        <h1>Welcome! 💗</h1>
-        <p>
-            Hello everyone! Welcome to my first website.
-            This is my little corner of the internet.
-        </p>
 
-        <button onclick="alert('Thank you for visiting! ❤️')">
-            Click Me!
-        </button>
-    </div>
+<div class="card">
+    <h1>Welcome! 💙</h1>
+    <p>Welcome to my little gaming world!</p>
+    <button onclick="alert('Thanks for visiting!')">Click Me!</button>
 </div>
 
-<!-- TIC TAC TOE GAME -->
+<h2>🎮 2D Gaming Zone</h2>
+<p>Choose your favourite game!</p>
 
-<section id="games">
-    <h1>🎮 Play Tic Tac Toe</h1>
-    <p>Choose your game mode!</p>
+<div class="game-grid">
 
-    <div class="game-card">
+<div class="game-card" onclick="openGame('tic')">
+    <div class="game-picture">⭕</div>
+    <h3>Tic Tac Toe</h3>
+    <p>Play with a friend</p>
+</div>
 
-        <button onclick="startGame('ai')">
-            🤖 Play with AI
-        </button>
+<div class="game-card" onclick="openGame('snake')">
+    <div class="game-picture">🐍</div>
+    <h3>Snake Game</h3>
+    <p>Collect the food</p>
+</div>
 
-        <button onclick="startGame('two')">
-            👥 2 Players
-        </button>
+<div class="game-card" onclick="openGame('memory')">
+    <div class="game-picture">🧠</div>
+    <h3>Memory Game</h3>
+    <p>Match the cards</p>
+</div>
 
-        <h3 id="gameMode">Select a mode</h3>
+<div class="game-card" onclick="openGame('guess')">
+    <div class="game-picture">🔢</div>
+    <h3>Number Guess</h3>
+    <p>Find the number</p>
+</div>
 
-        <div id="board">
-            <button class="cell" onclick="move(0)"></button>
-            <button class="cell" onclick="move(1)"></button>
-            <button class="cell" onclick="move(2)"></button>
-            <button class="cell" onclick="move(3)"></button>
-            <button class="cell" onclick="move(4)"></button>
-            <button class="cell" onclick="move(5)"></button>
-            <button class="cell" onclick="move(6)"></button>
-            <button class="cell" onclick="move(7)"></button>
-            <button class="cell" onclick="move(8)"></button>
-        </div>
+<div class="game-card" onclick="openGame('rps')">
+    <div class="game-picture">✊</div>
+    <h3>Rock Paper Scissors</h3>
+    <p>Beat the computer</p>
+</div>
 
-        <p id="gameStatus">Choose a mode to start!</p>
+</div>
 
-        <button onclick="resetGame()">🔄 Restart Game</button>
-    </div>
-</section>
+<h2>🌎 3D Gaming Zone</h2>
 
-<footer>
-    Made with love ♡
-</footer>
+<div class="game-grid">
+
+<div class="game-card" onclick="comingSoon('3D Car Racing')">
+    <div class="game-picture">🏎️</div>
+    <h3>3D Car Racing</h3>
+    <p>Coming Soon</p>
+</div>
+
+<div class="game-card" onclick="comingSoon('3D Bike Racing')">
+    <div class="game-picture">🏍️</div>
+    <h3>3D Bike Racing</h3>
+    <p>Coming Soon</p>
+</div>
+
+<div class="game-card" onclick="comingSoon('3D Adventure')">
+    <div class="game-picture">🌄</div>
+    <h3>3D Adventure</h3>
+    <p>Coming Soon</p>
+</div>
+
+<div class="game-card" onclick="comingSoon('3D Football')">
+    <div class="game-picture">⚽</div>
+    <h3>3D Football</h3>
+    <p>Coming Soon</p>
+</div>
+
+<div class="game-card" onclick="comingSoon('Block World')">
+    <div class="game-picture">🧱</div>
+    <h3>Block World</h3>
+    <p>Coming Soon</p>
+</div>
+
+</div>
+
+<div class="game-area" id="gameArea">
+    <h2 id="gameTitle">Game</h2>
+    <div id="gameContent"></div>
+    <p id="gameMessage"></p>
+    <button onclick="closeGame()">⬅ Back to Games</button>
+</div>
+
+</div>
+
+<footer>Made with 💙 | My Gaming Website</footer>
 
 <script>
-let board = ["","","","","","","","",""];
-let current = "X";
-let gameOver = false;
-let mode = "";
+let currentGame = "";
+let snakeTimer;
+let snake = [];
+let food = {};
+let direction = "right";
+let nextDirection = "right";
+let ticBoard = ["","","","","","","","",""];
+let ticTurn = "X";
+let memoryValues = [];
+let firstCard = null;
+let lockMemory = false;
+let memoryMatches = 0;
 
-const cells = document.querySelectorAll(".cell");
+function openGame(game) {
+    closeGame();
+    currentGame = game;
 
-const wins = [
-    [0,1,2], [3,4,5], [6,7,8],
-    [0,3,6], [1,4,7], [2,5,8],
-    [0,4,8], [2,4,6]
-];
+    document.getElementById("gameArea").style.display = "block";
+    document.getElementById("gameArea").scrollIntoView({behavior:"smooth"});
 
-function startGame(selectedMode) {
-    mode = selectedMode;
+    const content = document.getElementById("gameContent");
+    const title = document.getElementById("gameTitle");
+    const message = document.getElementById("gameMessage");
+    message.textContent = "";
 
-    document.getElementById("gameMode").innerText =
-        mode === "ai" ? "🤖 Playing with AI" : "👥 Two Players";
+    if(game === "tic") {
+        title.textContent = "⭕ Tic Tac Toe";
+        ticBoard = ["","","","","","","","",""];
+        ticTurn = "X";
+        drawTic();
+    }
 
-    resetGame();
+    if(game === "snake") {
+        title.textContent = "🐍 Snake Game";
+        content.innerHTML =
+        '<canvas id="snakeCanvas" width="300" height="300"></canvas>' +
+        '<p>Use arrow buttons to move</p>' +
+        '<button onclick="changeDirection(\'up\')">⬆️</button><br>' +
+        '<button onclick="changeDirection(\'left\')">⬅️</button>' +
+        '<button onclick="changeDirection(\'down\')">⬇️</button>' +
+        '<button onclick="changeDirection(\'right\')">➡️</button>' +
+        '<br><button onclick="startSnake()">Restart</button>';
+        startSnake();
+    }
+
+    if(game === "memory") {
+        title.textContent = "🧠 Memory Game";
+        startMemory();
+    }
+
+    if(game === "guess") {
+        title.textContent = "🔢 Number Guess";
+        content.innerHTML =
+        '<p>Guess a number between 1 and 20</p>' +
+        '<input id="guessInput" type="number" min="1" max="20">' +
+        '<button onclick="checkGuess()">Check</button>' +
+        '<button onclick="startGuess()">New Game</button>';
+        startGuess();
+    }
+
+    if(game === "rps") {
+        title.textContent = "✊ Rock Paper Scissors";
+        content.innerHTML =
+        '<p>Choose your move:</p>' +
+        '<button onclick="playRPS(\'Rock\')">✊ Rock</button>' +
+        '<button onclick="playRPS(\'Paper\')">✋ Paper</button>' +
+        '<button onclick="playRPS(\'Scissors\')">✌️ Scissors</button>';
+    }
 }
 
-function move(index) {
-    if (!mode || gameOver || board[index] !== "") return;
+function closeGame() {
+    clearInterval(snakeTimer);
+    document.getElementById("gameArea").style.display = "none";
+}
 
-    board[index] = current;
-    updateBoard();
+function comingSoon(name) {
+    alert(name + " is coming soon! 🎮");
+}
 
-    if (checkWinner()) return;
+// TIC TAC TOE
+function drawTic() {
+    let html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:280px;margin:auto">';
+    ticBoard.forEach((value,index) => {
+        html += '<button style="height:75px;font-size:30px" onclick="ticMove('+index+')">'+value+'</button>';
+    });
+    html += '</div><p>Turn: '+ticTurn+'</p><button onclick="openGame(\'tic\')">Restart</button>';
+    document.getElementById("gameContent").innerHTML = html;
+}
 
-    if (mode === "ai" && current === "X") {
-        current = "O";
-        document.getElementById("gameStatus").innerText =
-            "AI is thinking...";
-        setTimeout(aiMove, 400);
+function ticMove(index) {
+    if(ticBoard[index] !== "" || getWinner()) return;
+
+    ticBoard[index] = ticTurn;
+
+    let winner = getWinner();
+
+    if(winner) {
+        document.getElementById("gameMessage").textContent = winner + " wins! 🎉";
+    } else if(!ticBoard.includes("")) {
+        document.getElementById("gameMessage").textContent = "It's a draw!";
     } else {
-        current = current === "X" ? "O" : "X";
-        document.getElementById("gameStatus").innerText =
-            "Player " + current + "'s turn";
+        ticTurn = ticTurn === "X" ? "O" : "X";
     }
+
+    drawTic();
 }
 
-function aiMove() {
-    if (gameOver) return;
-
-    let empty = board
-        .map((v, i) => v === "" ? i : null)
-        .filter(i => i !== null);
-
-    if (empty.length === 0) return;
-
-    let choice = findWinningMove("O");
-
-    if (choice === -1) choice = findWinningMove("X");
-
-    if (choice === -1 && board[4] === "") choice = 4;
-
-    if (choice === -1) {
-        let corners = [0,2,6,8].filter(i => board[i] === "");
-        if (corners.length) {
-            choice = corners[Math.floor(Math.random() * corners.length)];
-        }
+function getWinner() {
+    const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+    ];
+    for(let line of wins) {
+        let [a,b,c] = line;
+        if(ticBoard[a] && ticBoard[a] === ticBoard[b] && ticBoard[b] === ticBoard[c]) return ticBoard[a];
     }
-
-    if (choice === -1) {
-        choice = empty[Math.floor(Math.random() * empty.length)];
-    }
-
-    board[choice] = "O";
-    updateBoard();
-
-    if (!checkWinner()) {
-        current = "X";
-        document.getElementById("gameStatus").innerText =
-            "Your turn (X)";
-    }
+    return null;
 }
 
-function findWinningMove(player) {
-    for (let i = 0; i < 9; i++) {
-        if (board[i] === "") {
-            board[i] = player;
-
-            let won = wins.some(line =>
-                line.every(index => board[index] === player)
-            );
-
-            board[i] = "";
-
-            if (won) return i;
-        }
-    }
-    return -1;
+// SNAKE GAME
+function startSnake() {
+    clearInterval(snakeTimer);
+    snake = [{x:5,y:5},{x:4,y:5},{x:3,y:5}];
+    direction = "right";
+    nextDirection = "right";
+    makeFood();
+    document.getElementById("gameMessage").textContent = "Score: 0";
+    drawSnake();
+    snakeTimer = setInterval(moveSnake,150);
 }
 
-function checkWinner() {
-    for (let line of wins) {
-        if (line.every(i => board[i] === "X")) {
-            document.getElementById("gameStatus").innerText =
-                "🎉 X Wins!";
-            gameOver = true;
-            return true;
-        }
-
-        if (line.every(i => board[i] === "O")) {
-            document.getElementById("gameStatus").innerText =
-                "🎉 O Wins!";
-            gameOver = true;
-            return true;
-        }
-    }
-
-    if (!board.includes("")) {
-        document.getElementById("gameStatus").innerText =
-            "🤝 It's a Draw!";
-        gameOver = true;
-        return true;
-    }
-
-    return false;
+function makeFood() {
+    food = {
+        x: Math.floor(Math.random()*15),
+        y: Math.floor(Math.random()*15)
+    };
 }
 
-function updateBoard() {
-    cells.forEach((cell, i) => {
-        cell.innerText = board[i];
+function changeDirection(dir) {
+    const opposite = {
+        up:"down", down:"up", left:"right", right:"left"
+    };
+    if(opposite[dir] !== direction) nextDirection = dir;
+}
+
+document.addEventListener("keydown", function(e) {
+    if(currentGame !== "snake") return;
+    const keys = {
+        ArrowUp:"up", ArrowDown:"down",
+        ArrowLeft:"left", ArrowRight:"right"
+    };
+    if(keys[e.key]) {
+        e.preventDefault();
+        changeDirection(keys[e.key]);
+    }
+});
+
+function moveSnake() {
+    direction = nextDirection;
+    let head = {...snake[0]};
+
+    if(direction === "up") head.y--;
+    if(direction === "down") head.y++;
+    if(direction === "left") head.x--;
+    if(direction === "right") head.x++;
+
+    if(head.x < 0 || head.x >= 15 || head.y < 0 || head.y >= 15 ||
+       snake.some(part => part.x === head.x && part.y === head.y)) {
+        clearInterval(snakeTimer);
+        document.getElementById("gameMessage").textContent =
+        "Game Over! Score: " + (snake.length-3);
+        return;
+    }
+
+    snake.unshift(head);
+
+    if(head.x === food.x && head.y === food.y) {
+        makeFood();
+    } else {
+        snake.pop();
+    }
+
+    document.getElementById("gameMessage").textContent =
+    "Score: " + (snake.length-3);
+
+    drawSnake();
+}
+
+function drawSnake() {
+    const canvas = document.getElementById("snakeCanvas");
+    if(!canvas) return;
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0,0,300,300);
+
+    ctx.fillStyle = "#ffcc33";
+    ctx.fillRect(food.x*20,food.y*20,18,18);
+
+    ctx.fillStyle = "#42d66b";
+    snake.forEach(part => {
+        ctx.fillRect(part.x*20,part.y*20,18,18);
     });
 }
 
-function resetGame() {
-    board = ["","","","","","","","",""];
-    current = "X";
-    gameOver = false;
+// MEMORY GAME
+function startMemory() {
+    memoryValues = ["🐶","🐱","🐸","🦊","🐼","🐵","🐶","🐱","🐸","🦊","🐼","🐵"];
+    memoryValues.sort(() => Math.random()-0.5);
+    firstCard = null;
+    lockMemory = false;
+    memoryMatches = 0;
 
-    updateBoard();
+    let html = '<div class="memory-grid">';
+    memoryValues.forEach((value,index) => {
+        html += '<button class="memory-card" id="mem'+index+'" onclick="flipMemory('+index+')">?</button>';
+    });
+    html += '</div><button onclick="startMemory()">Restart</button>';
+    document.getElementById("gameContent").innerHTML = html;
+    document.getElementById("gameMessage").textContent = "Find matching pairs!";
+}
 
-    document.getElementById("gameStatus").innerText =
-        mode === "ai" ? "Your turn (X)" :
-        mode === "two" ? "Player X's turn" :
-        "Choose a mode to start!";
+function flipMemory(index) {
+    if(lockMemory) return;
+    let card = document.getElementById("mem"+index);
+    if(card.classList.contains("open") || card.textContent !== "?") return;
+
+    card.textContent = memoryValues[index];
+    card.classList.add("open");
+
+    if(firstCard === null) {
+        firstCard = index;
+    } else {
+        let secondCard = index;
+        lockMemory = true;
+
+        if(memoryValues[firstCard] === memoryValues[secondCard]) {
+            memoryMatches++;
+            firstCard = null;
+            lockMemory = false;
+
+            if(memoryMatches === 6) {
+                document.getElementById("gameMessage").textContent = "You won! 🎉";
+            }
+        } else {
+            setTimeout(() => {
+                document.getElementById("mem"+firstCard).textContent = "?";
+                document.getElementById("mem"+secondCard).textContent = "?";
+                document.getElementById("mem"+firstCard).classList.remove("open");
+                document.getElementById("mem"+secondCard).classList.remove("open");
+                firstCard = null;
+                lockMemory = false;
+            },800);
+        }
+    }
+}
+
+// NUMBER GUESS
+let secretNumber = 0;
+
+function startGuess() {
+    secretNumber = Math.floor(Math.random()*20)+1;
+    document.getElementById("guessInput").value = "";
+    document.getElementById("gameMessage").textContent = "Your game has started!";
+}
+
+function checkGuess() {
+    let guess = Number(document.getElementById("guessInput").value);
+
+    if(guess < 1 || guess > 20 || !Number.isInteger(guess)) {
+        document.getElementById("gameMessage").textContent = "Enter a number from 1 to 20.";
+    } else if(guess === secretNumber) {
+        document.getElementById("gameMessage").textContent = "Correct! You won! 🎉";
+    } else if(guess < secretNumber) {
+        document.getElementById("gameMessage").textContent = "Try a bigger number!";
+    } else {
+        document.getElementById("gameMessage").textContent = "Try a smaller number!";
+    }
+}
+
+// ROCK PAPER SCISSORS
+function playRPS(player) {
+    const choices = ["Rock","Paper","Scissors"];
+    const computer = choices[Math.floor(Math.random()*3)];
+
+    let result = "";
+
+    if(player === computer) {
+        result = "It's a draw!";
+    } else if(
+        (player === "Rock" && computer === "Scissors") ||
+        (player === "Paper" && computer === "Rock") ||
+        (player === "Scissors" && computer === "Paper")
+    ) {
+        result = "You win! 🎉";
+    } else {
+        result = "Computer wins!";
+    }
+
+    document.getElementById("gameMessage").textContent =
+    "You: "+player+" | Computer: "+computer+" — "+result;
 }
 </script>
-
-<!-- TAWK.TO CHAT CODE:
-     Apna actual Tawk.to widget script yahan paste karo.
-     Dashboard se mila hua poora script use karna.
--->
 
 </body>
 </html>
