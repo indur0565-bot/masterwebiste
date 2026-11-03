@@ -3,323 +3,212 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Gaming World</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Gaming Zone</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#eaf5ff;color:#17466e;font-family:Arial;text-align:center}
-header,footer{background:#087acb;color:white;padding:22px;font-size:25px;font-weight:bold}
-main{padding:20px 12px}
-.welcome,.game-area{background:white;padding:22px;border-radius:18px;max-width:600px;margin:20px auto;box-shadow:0 4px 14px #b8d9f2}
-h2{color:#087acb;margin-top:35px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:900px;margin:20px auto}
-.game{background:white;border-radius:15px;padding:13px 6px;box-shadow:0 3px 10px #bdd9ef;cursor:pointer}
-.game:active{transform:scale(.97)}
-.pic{font-size:42px;background:#d9efff;border-radius:12px;padding:12px}
-.game h3{font-size:15px;margin:10px 0 4px}
-.game p{font-size:12px;margin:5px}
-button{background:#087acb;color:white;border:0;border-radius:10px;padding:11px 16px;margin:5px;font-size:15px}
-button:active{background:#07538a}
-.game-area{display:none}
-#board{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:270px;margin:15px auto}
-.cell{height:75px;font-size:28px}
-#snakeCanvas{max-width:100%;background:#12354e;border-radius:10px}
-#threeArea{width:100%;height:320px;background:#102c45;border-radius:12px;overflow:hidden}
-.controls{margin:12px}
-input{padding:10px;width:100px}
-.status{font-weight:bold;min-height:25px}
-@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+body{margin:0;font-family:Arial;background:#06152e;color:white}
+header{background:#087cf0;padding:22px;text-align:center}
+header h1{margin:0;font-size:30px}
+nav{background:#0b2850;padding:12px;text-align:center}
+nav a{color:white;margin:10px;text-decoration:none;font-weight:bold}
+.welcome{text-align:center;padding:28px 12px}
+.welcome h2{color:#53baff}
+button{background:#087cf0;color:white;border:0;padding:12px 18px;border-radius:9px;font-weight:bold;cursor:pointer}
+button:hover{background:#0056b8}
+.section{padding:15px}
+.section h2{color:#55baff;text-align:center}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.game{background:#102c52;border:1px solid #287ac9;border-radius:13px;padding:17px 8px;text-align:center;cursor:pointer}
+.game:hover{background:#164477;transform:scale(1.02)}
+.pic{font-size:38px}
+.game h3{font-size:15px;margin:8px 0}
+#playArea{display:none;background:#102c52;margin:15px;padding:15px;border-radius:15px;text-align:center}
+#playArea h2{color:#55baff}
+canvas{background:#06152e;border:2px solid #2994ff;border-radius:10px;max-width:100%;touch-action:none}
+#message{min-height:25px;color:#8fd1ff;font-weight:bold}
+.controls{margin:10px}
+.controls button{margin:4px;min-width:48px}
+footer{text-align:center;background:#0b2850;padding:20px;margin-top:30px}
+.small{font-size:13px;color:#b9d9ff}
 </style>
 </head>
 <body>
-<header>💙 MY GAMING WORLD 🎮</header>
-<main>
-<div class="welcome">
-<h1>Welcome to My Website! 💙</h1>
-<p>Play games and enjoy your gaming world!</p>
-</div>
 
-<h2>🎮 2D GAMES (20)</h2>
-<div class="grid" id="twoD"></div>
+<header>
+<h1>🎮 MY GAMING ZONE</h1>
+<p>Play • Enjoy • Have Fun</p>
+</header>
 
-<h2>🌎 3D GAMES (20)</h2>
-<div class="grid" id="threeD"></div>
+<nav>
+<a href="#home">Home</a>
+<a href="#games">2D Games</a>
+<a href="#threeD">3D Games</a>
+</nav>
 
-<div class="game-area" id="gameArea">
+<section class="welcome" id="home">
+<h2>Welcome to My Gaming Website!</h2>
+<p>Choose your favourite game and start playing.</p>
+<button onclick="document.getElementById('games').scrollIntoView()">Let's Play</button>
+</section>
+
+<section class="section" id="games">
+<h2>🎯 20 Playable 2D Games</h2>
+<div class="games" id="gameList"></div>
+</section>
+
+<div id="playArea">
 <h2 id="gameTitle">Game</h2>
-<div id="gameContent"></div>
-<p class="status" id="status"></p>
-<button onclick="closeGame()">⬅ Back to Games</button>
+<p id="message">Press Start to play!</p>
+<canvas id="gameCanvas" width="320" height="400"></canvas>
+<div class="controls" id="controls"></div>
+<button onclick="startGame()">🔄 Restart</button>
+<button onclick="closeGame()">✖ Close Game</button>
 </div>
-</main>
-<footer>Made with 💙 | Gaming World</footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<section class="section" id="threeD">
+<h2>🌎 3D Gaming Zone</h2>
+<div class="games">
+<div class="game"><div class="pic">🏎️</div><h3>3D Car Racing</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🌌</div><h3>Space Explorer</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🧱</div><h3>3D Block World</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🏃</div><h3>3D Obstacle Run</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">⚽</div><h3>3D Football</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🏀</div><h3>3D Basketball</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🏝️</div><h3>Island Explorer</h3><p class="small">Coming soon</p></div>
+<div class="game"><div class="pic">🧩</div><h3>3D Puzzle</h3><p class="small">Coming soon</p></div>
+</div>
+</section>
+
+<footer>💙 Made with fun | My Gaming Zone</footer>
+
 <script>
-const games2D=[
-["⭕","Tic Tac Toe","tic"],
-["🐍","Snake Game","snake"],
-["🧠","Memory Match","memory"],
-["🔢","Number Guess","guess"],
-["✊","Rock Paper Scissors","rps"],
-["🏓","Ping Pong","soon"],
-["🧱","Brick Breaker","soon"],
-["🚀","Space Shooter","soon"],
-["🏃","Running Game","soon"],
-["🧩","Puzzle Game","soon"],
-["🎯","Target Shooter","soon"],
-["🏀","Basketball","soon"],
-["⚽","Football","soon"],
-["🏸","Badminton","soon"],
-["🚗","Car Dodging","soon"],
-["🎈","Balloon Pop","soon"],
-["🍎","Fruit Catch","soon"],
-["🐦","Flappy Bird","soon"],
-["♟️","Chess","soon"],
-["🎲","Dice Game","soon"]
+const games=[
+["🎯","Target Click"],["🟡","Catch the Ball"],["🚧","Dodge Blocks"],
+["🏓","Pong"],["🧱","Brick Breaker"],["🐍","Snake"],
+["🧠","Memory Match"],["❎","Tic Tac Toe"],["⚡","Reaction Test"],
+["🐹","Whack a Circle"],["➕","Math Challenge"],["🎨","Color Match"],
+["🔔","Simon Game"],["⌨️","Typing Speed"],["🌀","Maze Runner"],
+["🐦","Flappy Ball"],["🏃","Jump Runner"],["🫧","Bubble Pop"],
+["🔢","Number Tap"],["🌟","Star Collector"]
 ];
 
-const games3D=[
-["🏎️","3D Car Racing","car3d"],
-["🏍️","3D Bike Racing","soon"],
-["🌄","3D Adventure","soon"],
-["⚽","3D Football","soon"],
-["🧱","3D Block World","soon"],
-["🚀","3D Space World","soon"],
-["🏝️","3D Island","soon"],
-["🏁","3D Track Racing","soon"],
-["🚂","3D Train World","soon"],
-["✈️","3D Flight","soon"],
-["🐠","3D Ocean","soon"],
-["🏰","3D Castle","soon"],
-["🌳","3D Forest","soon"],
-["🎳","3D Bowling","soon"],
-["🏀","3D Basketball","soon"],
-["🚢","3D Ship World","soon"],
-["🪐","3D Planet World","soon"],
-["🛸","3D UFO Game","soon"],
-["🏟️","3D Stadium","soon"],
-["🎢","3D Roller Coaster","soon"]
-];
-
-function makeCards(list,id){
- document.getElementById(id).innerHTML=list.map(g=>
- `<div class="game" onclick="openGame('${g[2]}','${g[1]}')">
- <div class="pic">${g[0]}</div><h3>${g[1]}</h3>
- <p>${g[2]==="soon"?"Coming Soon":"▶ Play Now"}</p></div>`
- ).join("");
-}
-makeCards(games2D,"twoD");
-makeCards(games3D,"threeD");
-
-let current="",timer=null,scene,camera,renderer,player,obstacles=[],score=0,carSpeed=0;
-const area=document.getElementById("gameArea");
-const content=document.getElementById("gameContent");
-const statusText=document.getElementById("status");
-
-function openGame(type,name){
- closeGame();
- current=type;
- area.style.display="block";
- area.scrollIntoView({behavior:"smooth"});
- document.getElementById("gameTitle").textContent=name;
- statusText.textContent="";
- content.innerHTML="";
-
- if(type==="tic")startTic();
- else if(type==="snake")startSnake();
- else if(type==="memory")startMemory();
- else if(type==="guess")startGuess();
- else if(type==="rps")startRPS();
- else if(type==="car3d")start3D();
- else statusText.textContent="This game is coming soon. More games will be added!";
-}
-
-function closeGame(){
- clearInterval(timer);
- timer=null;
- if(renderer){
-  renderer.dispose();
-  renderer=null;
- }
- if(area)area.style.display="none";
- content.innerHTML="";
- current="";
-}
-
-// TIC TAC TOE
-let cells=[],turn="X";
-function startTic(){
- cells=Array(9).fill("");
- turn="X";
- content.innerHTML='<div id="board"></div><button onclick="startTic()">Restart</button>';
- drawTic();
-}
-function drawTic(){
- let b=document.getElementById("board");
- if(!b)return;
- b.innerHTML=cells.map((v,i)=>`<button class="cell" onclick="ticMove(${i})">${v}</button>`).join("");
- statusText.textContent="Turn: "+turn;
-}
-function ticMove(i){
- if(cells[i]||winner())return;
- cells[i]=turn;
- if(winner()){drawTic();statusText.textContent=turn+" wins! 🎉";return}
- if(!cells.includes("")){drawTic();statusText.textContent="It's a draw!";return}
- turn=turn==="X"?"O":"X";
- drawTic();
-}
-function winner(){
- let lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
- return lines.some(l=>cells[l[0]]&&cells[l[0]]===cells[l[1]]&&cells[l[1]]===cells[l[2]]);
-}
-
-// SNAKE
-let snake,food,dir="right",nextDir="right";
-function startSnake(){
- content.innerHTML='<canvas id="snakeCanvas" width="300" height="300"></canvas><p>Use arrow buttons</p><div><button onclick="snakeDir(\'up\')">⬆️</button><br><button onclick="snakeDir(\'left\')">⬅️</button><button onclick="snakeDir(\'down\')">⬇️</button><button onclick="snakeDir(\'right\')">➡️</button></div><button onclick="startSnake()">Restart</button>';
- snake=[{x:5,y:5},{x:4,y:5},{x:3,y:5}];
- dir=nextDir="right";newFood();drawSnake();
- timer=setInterval(moveSnake,150);
-}
-function newFood(){food={x:Math.floor(Math.random()*15),y:Math.floor(Math.random()*15)}}
-function snakeDir(d){
- let opp={up:"down",down:"up",left:"right",right:"left"};
- if(opp[d]!==dir)nextDir=d;
-}
-document.addEventListener("keydown",e=>{
- let map={ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right"};
- if(current==="snake"&&map[e.key]){e.preventDefault();snakeDir(map[e.key])}
+const list=document.getElementById("gameList");
+games.forEach((g,i)=>{
+ let d=document.createElement("div");
+ d.className="game";
+ d.innerHTML=`<div class="pic">${g[0]}</div><h3>${i+1}. ${g[1]}</h3><button>Play</button>`;
+ d.onclick=()=>openGame(i);
+ list.appendChild(d);
 });
-function drawSnake(){
- let c=document.getElementById("snakeCanvas");if(!c)return;
- let x=c.getContext("2d");x.clearRect(0,0,300,300);
- x.fillStyle="#ffcf33";x.fillRect(food.x*20,food.y*20,18,18);
- x.fillStyle="#42d66b";snake.forEach(p=>x.fillRect(p.x*20,p.y*20,18,18));
-}
-function moveSnake(){
- dir=nextDir;let h={...snake[0]};
- if(dir==="up")h.y--;if(dir==="down")h.y++;
- if(dir==="left")h.x--;if(dir==="right")h.x++;
- if(h.x<0||h.x>14||h.y<0||h.y>14||snake.some(p=>p.x===h.x&&p.y===h.y)){
- clearInterval(timer);timer=null;statusText.textContent="Game Over! Score: "+(snake.length-3);return;
- }
- snake.unshift(h);
- if(h.x===food.x&&h.y===food.y)newFood();else snake.pop();
- statusText.textContent="Score: "+(snake.length-3);
- drawSnake();
-}
 
-// MEMORY
-let symbols=[],first=null,locked=false,matches=0;
-function startMemory(){
- symbols=["🐶","🐱","🐸","🦊","🐼","🐵","🐶","🐱","🐸","🦊","🐼","🐵"].sort(()=>Math.random()-.5);
- first=null;locked=false;matches=0;
- content.innerHTML='<div class="grid" style="grid-template-columns:repeat(4,1fr)" id="memoryGrid"></div><button onclick="startMemory()">Restart</button>';
- document.getElementById("memoryGrid").innerHTML=symbols.map((s,i)=>`<button id="m${i}" onclick="flip(${i})">?</button>`).join("");
- statusText.textContent="Find matching pairs!";
+const c=document.getElementById("gameCanvas"),ctx=c.getContext("2d");
+let game=0,loop=null,score=0,objects=[],player={},keys={},running=false;
+let timer=0,board=[],turn="X",memory=[],sequence=[],typed="",maze=[];
+const msg=document.getElementById("message");
+const title=document.getElementById("gameTitle");
+const controls=document.getElementById("controls");
+function say(t){msg.textContent=t}
+function text(t,x,y,size=22){ctx.fillStyle="white";ctx.font=`${size}px Arial`;ctx.fillText(t,x,y)}
+function circle(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
+function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(x,y,w,h)}
+function clear(){ctx.clearRect(0,0,320,400)}
+function stop(){running=false;if(loop)clearInterval(loop);loop=null}
+function closeGame(){stop();document.getElementById("playArea").style.display="none"}
+function openGame(n){
+ game=n;document.getElementById("playArea").style.display="block";
+ title.textContent=games[n][1];document.getElementById("playArea").scrollIntoView();
+ startGame();
 }
-function flip(i){
- if(locked)return;
- let b=document.getElementById("m"+i);
- if(b.textContent!=="?")return;
- b.textContent=symbols[i];
- if(first===null){first=i;return}
- let old=first;first=null;locked=true;
- if(symbols[old]===symbols[i]){
- matches++;locked=false;
- if(matches===6)statusText.textContent="You won! 🎉";
- }else{
- setTimeout(()=>{
-  document.getElementById("m"+old).textContent="?";
-  document.getElementById("m"+i).textContent="?";
-  locked=false;
- },700);
+function startGame(){
+ stop();score=0;timer=0;objects=[];keys={};player={x:150,y:340};
+ controls.innerHTML="";
+ clear();say("Game started!");running=true;
+ if(game===0||game===1||game===2||game===8||game===9||game===17||game===19){
+   player.x=150;player.y=180;player.r=22;spawn();
+   loop=setInterval(tick,40);
+ }else if(game===3||game===4){player.x=150;player.y=340;player.v=0;objects=[{x:160,y:200,vx:3,vy:3}];loop=setInterval(tick,25)}
+ else if(game===5){player.x=150;player.y=200;player.dir="right";player.body=[[150,200],[130,200],[110,200]];loop=setInterval(tick,140);addControls(["⬆️","⬅️","⬇️","➡️"])}
+ else if(game===6){memory=Array.from({length:12},(_,i)=>i+1);memory.sort(()=>Math.random()-.5);drawMemory()}
+ else if(game===7){board=Array(9).fill("");turn="X";drawBoard()}
+ else if(game===10){mathQuestion()}
+ else if(game===11){colorQuestion()}
+ else if(game===12){sequence=[];simonNext()}
+ else if(game===13){typed="";say("Type the word: BLUE");text("BLUE",100,200,35);addKeyboard()}
+ else if(game===14){player={x:20,y:20};maze=Array.from({length:10},()=>Array(8).fill(0));drawMaze();addControls(["⬆️","⬅️","⬇️","➡️"])}
+ else if(game===15){player={x:50,y:200,vy:0};loop=setInterval(tick,35);say("Tap the screen to fly!")}
+ else if(game===16){player={x:150,y:330,vy:0};loop=setInterval(tick,35);say("Tap to jump!")}
+ else if(game===18){objects=Array.from({length:10},(_,i)=>({x:25+i*30,y:200,number:i+1}));drawNumbers()}
+}
+function spawn(){
+ objects=[{x:25+Math.random()*270,y:40+Math.random()*300,r:18}];
+}
+function tick(){
+ if(!running)return;timer++;clear();
+ if(game===0){let o=objects[0];circle(o.x,o.y,20,"#ffca28");text("Score: "+score,10,25);if(timer%25===0)spawn()}
+ if(game===1){let o=objects[0];o.y+=4;if(o.y>400){score=Math.max(0,score-1);spawn()}rect(player.x-25,350,50,18,"#42baff");circle(o.x,o.y,14,"#ffca28");text("Score: "+score,10,25)}
+ if(game===2){objects.forEach(o=>{o.y+=5;rect(o.x,o.y,30,30,"#ff5252")});rect(player.x-18,350,36,25,"#42baff");if(objects.some(o=>o.y>340&&Math.abs(o.x-player.x)<35)){say("Oops! Score: "+score);stop()}if(timer%35===0)objects.push({x:Math.random()*280,y:0})}
+ if(game===8||game===9||game===17||game===19){
+ let o=objects[0];circle(o.x,o.y,o.r||20,game===8?"#ffca28":game===9?"#ff6584":game===17?"#61d6ff":"#a78bfa");
+ text("Score: "+score,10,25);
+ if(game===17){text("Tap bubbles!",85,370,16)}
  }
+ if(game===3){let b=objects[0];b.x+=b.vx;b.y+=b.vy;if(b.x<8||b.x>312)b.vx*=-1;if(b.y<8||b.y>392)b.vy*=-1;circle(b.x,b.y,9,"white");rect(player.x-35,360,70,12,"#42baff");text("Score: "+score,10,25)}
+ if(game===4){let b=objects[0];b.x+=b.vx;b.y+=b.vy;if(b.x<8||b.x>312)b.vx*=-1;if(b.y<8)b.vy*=-1;if(b.y>375){b.x=160;b.y=200;b.vy=-3;score=Math.max(0,score-1)}if(b.y>345&&b.x>player.x-45&&b.x<player.x+45)b.vy=-Math.abs(b.vy);circle(b.x,b.y,8,"white");rect(player.x-45,370,90,10,"#42baff");text("Score: "+score,10,25)}
+ if(game===5){let h=player.body[0];if(timer%1===0){let d=player.dir;let p=[h[0],h[1]];if(d==="right")p[0]+=20;if(d==="left")p[0]-=20;if(d==="up")p[1]-=20;if(d==="down")p[1]+=20;player.body.unshift(p);if(Math.abs(p[0]-player.foodX)<18&&Math.abs(p[1]-player.foodY)<18){score++;food()}else player.body.pop();if(p[0]<0||p[0]>300||p[1]<0||p[1]>380){say("Game over! Score: "+score);stop()}}player.body.forEach((p,i)=>rect(p[0],p[1],18,18,i?"#35a86b":"#8aff9a"));circle(player.foodX+8,player.foodY+8,8,"#ff5252");text("Score: "+score,10,20)}
+ if(game===15){player.vy+=.35;player.y+=player.vy;circle(70,player.y,15,"#ffca28");rect(0,380,320,20,"#238b58");if(player.y>365){say("Game over!");stop()}}
+ if(game===16){player.vy+=.5;player.y+=player.vy;rect(0,370,320,30,"#238b58");rect(240,330,35,40,"#ff5252");circle(player.x,player.y,17,"#ffca28");if(player.y>350){say("Game over!");stop()}}
+ if(game===1||game===17){if(game===1&&objects[0].y>335&&Math.abs(objects[0].x-player.x)<30){score++;spawn()} }
 }
-
-// NUMBER GUESS
-let secret;
-function startGuess(){
- secret=Math.floor(Math.random()*20)+1;
- content.innerHTML='<p>Guess a number from 1 to 20</p><input id="guess" type="number" min="1" max="20"><button onclick="checkGuess()">Check</button><button onclick="startGuess()">New Game</button>';
- statusText.textContent="Your game has started!";
+function food(){player.foodX=Math.floor(Math.random()*14)*20;player.foodY=Math.floor(Math.random()*18)*20}
+function addControls(arr){
+ arr.forEach(a=>{let b=document.createElement("button");b.textContent=a;b.onclick=()=>move(a);controls.appendChild(b)})
 }
-function checkGuess(){
- let n=Number(document.getElementById("guess").value);
- if(n===secret)statusText.textContent="Correct! You won! 🎉";
- else if(n<1||n>20)statusText.textContent="Enter 1 to 20";
- else statusText.textContent=n<secret?"Try a bigger number!":"Try a smaller number!";
+function move(a){
+ if(game===5){if(a==="⬆️"&&player.dir!=="down")player.dir="up";if(a==="⬇️"&&player.dir!=="up")player.dir="down";if(a==="⬅️"&&player.dir!=="right")player.dir="left";if(a==="➡️"&&player.dir!=="left")player.dir="right"}
+ if(game===14){if(a==="⬆️")player.y=Math.max(0,player.y-30);if(a==="⬇️")player.y=Math.min(360,player.y+30);if(a==="⬅️")player.x=Math.max(0,player.x-30);if(a==="➡️")player.x=Math.min(280,player.x+30);drawMaze()}
+ if(game===3||game===4)player.x=Math.max(40,Math.min(280,player.x+(a==="⬅️"?-25:a==="➡️"?25:0)));
 }
-
-// ROCK PAPER SCISSORS
-function startRPS(){
- content.innerHTML="<p>Choose your move</p><button onclick=\"rps('Rock')\">✊ Rock</button><button onclick=\"rps('Paper')\">✋ Paper</button><button onclick=\"rps('Scissors')\">✌️ Scissors</button>";
+function drawMemory(){
+ clear();text("Find matching pairs",55,30,20);
+ memory.forEach((v,i)=>{let x=15+(i%4)*77,y=55+Math.floor(i/4)*100;rect(x,y,65,80,"#1765a8");text(v,x+25,y+48,24)});
+ say("Tap a card to reveal it. Match the pairs!");
 }
-function rps(p){
- let c=["Rock","Paper","Scissors"][Math.floor(Math.random()*3)];
- let result=p===c?"Draw!":((p==="Rock"&&c==="Scissors")||(p==="Paper"&&c==="Rock")||(p==="Scissors"&&c==="Paper"))?"You win!":"Computer wins!";
- statusText.textContent="You: "+p+" | Computer: "+c+" — "+result;
+let first=null,matched=[];
+c.addEventListener("pointerdown",e=>{
+ if(!running)return;
+ let r=c.getBoundingClientRect(),x=(e.clientX-r.left)*320/r.width,y=(e.clientY-r.top)*400/r.height;
+ if(game===0){let o=objects[0];if(Math.hypot(x-o.x,y-o.y)<25){score++;say("Score: "+score);spawn()}}
+ if(game===1){player.x=x}
+ if(game===2){player.x=x}
+ if(game===8){let o=objects[0];if(Math.hypot(x-o.x,y-o.y)<30){score++;spawn();say("Score: "+score)}}
+ if(game===9){score++;spawn();say("Circles popped: "+score)}
+ if(game===17){score++;spawn();say("Bubbles popped: "+score)}
+ if(game===19){score++;spawn();say("Stars collected: "+score)}
+ if(game===15){player.vy=-6}
+ if(game===16&&player.y>300){player.vy=-9}
+ if(game===6){let col=Math.floor((x-15)/77),row=Math.floor((y-55)/100),i=row*4+col;if(i>=0&&i<12){say("You tapped card "+memory[i]);}}
+ if(game===7){let col=Math.floor(x/106),row=Math.floor(y/133),i=row*3+col;if(i<9&&board[i]===""){board[i]=turn;turn=turn==="X"?"O":"X";drawBoard()}}
+ if(game===18){let n=Math.floor((x-10)/30)+1;if(n===score+1){score++;drawNumbers();if(score===10)say("You win! Great job!")}}
+});
+c.addEventListener("pointermove",e=>{if(!running)return;let r=c.getBoundingClientRect();let x=(e.clientX-r.left)*320/r.width;if(game===3||game===4||game===1||game===2)player.x=x});
+document.addEventListener("keydown",e=>{
+ if(!running)return;let k=e.key.toLowerCase();
+ if(game===5){if(k==="arrowup"&&player.dir!=="down")player.dir="up";if(k==="arrowdown"&&player.dir!=="up")player.dir="down";if(k==="arrowleft"&&player.dir!=="right")player.dir="left";if(k==="arrowright"&&player.dir!=="left")player.dir="right"}
+ if(game===3||game===4){if(k==="arrowleft")player.x-=20;if(k==="arrowright")player.x+=20}
+ if(game===15){if(k==="arrowup")move("⬆️");if(k==="arrowdown")move("⬇️");if(k==="arrowleft")move("⬅️");if(k==="arrowright")move("➡️")}
+});
+function drawBoard(){
+ clear();board.forEach((v,i)=>{let x=(i%3)*106,y=Math.floor(i/3)*133;rect(x+2,y+2,102,129,"#124779");text(v,x+40,y+78,40)});say("Turn: "+turn+" | Tap a square");
+ if(board.every(Boolean))say("Board full! Restart to play again.");
 }
-
-// 3D CAR GAME
-function start3D(){
- if(typeof THREE==="undefined"){
-  statusText.textContent="3D library could not load. Check your internet connection.";
-  return;
- }
- content.innerHTML='<div id="threeArea"></div><p>Move your car left and right to avoid blocks.</p><div class="controls"><button onclick="moveCar(-1)">⬅️ LEFT</button><button onclick="moveCar(1)">RIGHT ➡️</button></div><button onclick="start3D()">Restart 3D Game</button>';
- score=0;carSpeed=0.12;obstacles=[];
- const box=document.getElementById("threeArea");
- scene=new THREE.Scene();
- scene.background=new THREE.Color(0x8fd3ff);
- camera=new THREE.PerspectiveCamera(70,box.clientWidth/box.clientHeight,0.1,100);
- camera.position.set(0,5,9);
- camera.lookAt(0,0,0);
- renderer=new THREE.WebGLRenderer({antialias:true});
- renderer.setSize(box.clientWidth,320);
- box.appendChild(renderer.domElement);
- scene.add(new THREE.HemisphereLight(0xffffff,0x446688,2));
- let road=new THREE.Mesh(new THREE.BoxGeometry(8,.2,45),new THREE.MeshStandardMaterial({color:0x333b46}));
- road.position.z=-12;
- scene.add(road);
- for(let x of [-2,0,2]){
-  let line=new THREE.Mesh(new THREE.BoxGeometry(.07,.03,45),new THREE.MeshBasicMaterial({color:0xffffff}));
-  line.position.set(x,.12,-12);scene.add(line);
- }
- player=new THREE.Mesh(new THREE.BoxGeometry(1,0.6,1.8),new THREE.MeshStandardMaterial({color:0x087acb}));
- player.position.set(0,.55,4);
- scene.add(player);
- for(let i=0;i<5;i++)addObstacle(-25-i*9);
- let running=true;
- function animate(){
-  if(!renderer||current!=="car3d")return;
-  requestAnimationFrame(animate);
-  obstacles.forEach(o=>{
-   o.position.z+=carSpeed;
-   if(o.position.z>7){
-    o.position.z=-35;
-    o.position.x=[-2,0,2][Math.floor(Math.random()*3)];
-    score++;
-    statusText.textContent="Score: "+score;
-   }
-   if(Math.abs(o.position.x-player.position.x)<.8&&Math.abs(o.position.z-player.position.z)<1.2){
-    statusText.textContent="Crash! Score: "+score+" — Press Restart";
-    carSpeed=0;
-   }
-  });
-  renderer.render(scene,camera);
- }
- animate();
-}
-function addObstacle(z){
- let o=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({color:0xff5555}));
- o.position.set([-2,0,2][Math.floor(Math.random()*3)],.65,z);
- scene.add(o);obstacles.push(o);
-}
-function moveCar(d){
- if(player)player.position.x=Math.max(-2,Math.min(2,player.position.x+d*2));
-}
+function food(){player.foodX=Math.floor(Math.random()*14)*20;player.foodY=Math.floor(Math.random()*18)*20}
+function drawNumbers(){clear();objects.forEach(o=>{circle(o.x,o.y,13,"#42baff");text(o.number,o.x-5,o.y+5,13)});say("Tap numbers from 1 to 10 in order.")}
+function drawMaze(){clear();for(let y=0;y<10;y++)for(let x=0;x<8;x++)rect(x*40,y*40,38,38,"#124779");rect(280,360,38,38,"#278b58");circle(player.x+15,player.y+15,12,"#ffca28");say("Reach the green finish! Use arrows.");}
+function mathQuestion(){let a=2+Math.floor(Math.random()*10),b=2+Math.floor(Math.random()*10),ans=a+b;clear();text(a+" + "+b+" = ?",85,130,30);let inp=document.createElement("input");inp.type="number";inp.placeholder="Your answer";inp.id="answer";controls.appendChild(inp);let btn=document.createElement("button");btn.textContent="Check";btn.onclick=()=>{if(Number(inp.value)===ans){score++;say("Correct! Score: "+score);mathQuestion()}else say("Try again!")};controls.appendChild(btn)}
+function colorQuestion(){let colors=["RED","BLUE","GREEN","YELLOW"];let answer=colors[Math.floor(Math.random()*4)];clear();text(answer,85,170,32);colors.forEach(v=>{let b=document.createElement("button");b.textContent=v;b.onclick=()=>{if(v===answer){score++;say("Correct! Score: "+score)}else say("Try again!");colorQuestion()};controls.appendChild(b)});say("Choose the displayed color")}
+function simonNext(){let names=["RED","BLUE","GREEN","YELLOW"];sequence.push(names[Math.floor(Math.random()*4)]);clear();text("Remember:",105,100);text(sequence.join(" - "),30,180,20);let b=document.createElement("button");b.textContent="I remember";controls.appendChild(b);b.onclick=()=>{clear();names.forEach(v=>{let z=document.createElement("button");z.textContent=v;z.onclick=()=>{if(v===sequence[sequence.length-1]){score++;say("Correct! Level "+score);controls.innerHTML="";simonNext()}else{say("Wrong! Restart to try again.");stop()}};controls.appendChild(z)})}}
+function addKeyboard(){let inp=document.createElement("input");inp.placeholder="Type BLUE";controls.appendChild(inp);let b=document.createElement("button");b.textContent="Check";controls.appendChild(b);b.onclick=()=>{if(inp.value.toUpperCase()==="BLUE"){score++;say("Correct! You win!")}else say("Try again")}}
 </script>
 </body>
 </html>
