@@ -2,78 +2,300 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Website</title>
+    <title>My Little Website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #fff0f5;
+            background: #e3f2fd;
             text-align: center;
-            color: #6b4055;
+            color: #17446b;
         }
 
         header {
-            background: #f4b6cf;
+            background: #1976d2;
             padding: 25px;
             font-size: 28px;
             font-weight: bold;
+            color: white;
         }
 
         .container {
             padding: 40px 20px;
         }
 
-        .card {
+        .card, .game-card {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             max-width: 400px;
             margin: auto;
-            box-shadow: 0 4px 15px #e9c5d5;
+            box-shadow: 0 4px 15px #b6d9f5;
         }
 
         button {
-            background: #e88bb2;
+            background: #2196f3;
             color: white;
             border: none;
-            padding: 13px 25px;
+            padding: 13px 20px;
             border-radius: 25px;
             font-size: 16px;
             cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1565c0;
+        }
+
+        #games {
+            padding: 35px 15px;
+            margin-top: 30px;
+            background: #bbdefb;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 85px);
+            gap: 8px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 85px;
+            height: 85px;
+            padding: 0;
+            border-radius: 12px;
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 2px solid #64b5f6;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        #gameStatus {
+            font-size: 19px;
+            font-weight: bold;
+            min-height: 25px;
         }
 
         footer {
-            margin-top: 50px;
+            margin-top: 40px;
             padding: 20px;
-            background: #f4b6cf;
+            background: #1976d2;
+            color: white;
         }
     </style>
 </head>
 
 <body>
 
-    <header>My Little Website 🌸</header>
+<header>My Little Website 🌸</header>
 
-    <div class="container">
-        <div class="card">
-            <h1>Welcome! 💗</h1>
+<div class="container">
+    <div class="card">
+        <h1>Welcome! 💗</h1>
+        <p>
+            Hello everyone! Welcome to my first website.
+            This is my little corner of the internet.
+        </p>
 
-            <p>
-                Hello everyone! Welcome to my first website.
-                This is my little corner of the internet.
-            </p>
-
-            <button onclick="alert('Thank you for visiting! ❤️')">
-                Click Me!
-            </button>
-        </div>
+        <button onclick="alert('Thank you for visiting! ❤️')">
+            Click Me!
+        </button>
     </div>
+</div>
 
-    <footer>
-        Made with love ♡
-    </footer>
+<!-- TIC TAC TOE GAME -->
+
+<section id="games">
+    <h1>🎮 Play Tic Tac Toe</h1>
+    <p>Choose your game mode!</p>
+
+    <div class="game-card">
+
+        <button onclick="startGame('ai')">
+            🤖 Play with AI
+        </button>
+
+        <button onclick="startGame('two')">
+            👥 2 Players
+        </button>
+
+        <h3 id="gameMode">Select a mode</h3>
+
+        <div id="board">
+            <button class="cell" onclick="move(0)"></button>
+            <button class="cell" onclick="move(1)"></button>
+            <button class="cell" onclick="move(2)"></button>
+            <button class="cell" onclick="move(3)"></button>
+            <button class="cell" onclick="move(4)"></button>
+            <button class="cell" onclick="move(5)"></button>
+            <button class="cell" onclick="move(6)"></button>
+            <button class="cell" onclick="move(7)"></button>
+            <button class="cell" onclick="move(8)"></button>
+        </div>
+
+        <p id="gameStatus">Choose a mode to start!</p>
+
+        <button onclick="resetGame()">🔄 Restart Game</button>
+    </div>
+</section>
+
+<footer>
+    Made with love ♡
+</footer>
+
+<script>
+let board = ["","","","","","","","",""];
+let current = "X";
+let gameOver = false;
+let mode = "";
+
+const cells = document.querySelectorAll(".cell");
+
+const wins = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+];
+
+function startGame(selectedMode) {
+    mode = selectedMode;
+
+    document.getElementById("gameMode").innerText =
+        mode === "ai" ? "🤖 Playing with AI" : "👥 Two Players";
+
+    resetGame();
+}
+
+function move(index) {
+    if (!mode || gameOver || board[index] !== "") return;
+
+    board[index] = current;
+    updateBoard();
+
+    if (checkWinner()) return;
+
+    if (mode === "ai" && current === "X") {
+        current = "O";
+        document.getElementById("gameStatus").innerText =
+            "AI is thinking...";
+        setTimeout(aiMove, 400);
+    } else {
+        current = current === "X" ? "O" : "X";
+        document.getElementById("gameStatus").innerText =
+            "Player " + current + "'s turn";
+    }
+}
+
+function aiMove() {
+    if (gameOver) return;
+
+    let empty = board
+        .map((v, i) => v === "" ? i : null)
+        .filter(i => i !== null);
+
+    if (empty.length === 0) return;
+
+    let choice = findWinningMove("O");
+
+    if (choice === -1) choice = findWinningMove("X");
+
+    if (choice === -1 && board[4] === "") choice = 4;
+
+    if (choice === -1) {
+        let corners = [0,2,6,8].filter(i => board[i] === "");
+        if (corners.length) {
+            choice = corners[Math.floor(Math.random() * corners.length)];
+        }
+    }
+
+    if (choice === -1) {
+        choice = empty[Math.floor(Math.random() * empty.length)];
+    }
+
+    board[choice] = "O";
+    updateBoard();
+
+    if (!checkWinner()) {
+        current = "X";
+        document.getElementById("gameStatus").innerText =
+            "Your turn (X)";
+    }
+}
+
+function findWinningMove(player) {
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === "") {
+            board[i] = player;
+
+            let won = wins.some(line =>
+                line.every(index => board[index] === player)
+            );
+
+            board[i] = "";
+
+            if (won) return i;
+        }
+    }
+    return -1;
+}
+
+function checkWinner() {
+    for (let line of wins) {
+        if (line.every(i => board[i] === "X")) {
+            document.getElementById("gameStatus").innerText =
+                "🎉 X Wins!";
+            gameOver = true;
+            return true;
+        }
+
+        if (line.every(i => board[i] === "O")) {
+            document.getElementById("gameStatus").innerText =
+                "🎉 O Wins!";
+            gameOver = true;
+            return true;
+        }
+    }
+
+    if (!board.includes("")) {
+        document.getElementById("gameStatus").innerText =
+            "🤝 It's a Draw!";
+        gameOver = true;
+        return true;
+    }
+
+    return false;
+}
+
+function updateBoard() {
+    cells.forEach((cell, i) => {
+        cell.innerText = board[i];
+    });
+}
+
+function resetGame() {
+    board = ["","","","","","","","",""];
+    current = "X";
+    gameOver = false;
+
+    updateBoard();
+
+    document.getElementById("gameStatus").innerText =
+        mode === "ai" ? "Your turn (X)" :
+        mode === "two" ? "Player X's turn" :
+        "Choose a mode to start!";
+}
+</script>
+
+<!-- TAWK.TO CHAT CODE:
+     Apna actual Tawk.to widget script yahan paste karo.
+     Dashboard se mila hua poora script use karna.
+-->
 
 </body>
 </html>
